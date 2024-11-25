@@ -5,7 +5,7 @@ import Header from "./Header";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
-  const API_URL = "http://localhost:5000/api/auth";
+  const API_URL = "https://quad-harvest-backend.onrender.com/api/auth";
   const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const [formData, setFormData] = useState({
@@ -85,7 +85,6 @@ const Signup = () => {
             </h1>
             <h3>Sow the seeds of success, sign up now.</h3>
           </div>
-          
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div className="flex flex-col">
               <label>Name</label>
@@ -153,21 +152,21 @@ const Signup = () => {
               <label>I accept the terms and conditions.</label>
             </div>
 
-            <div className= "flex flex-col items-center text-center gap-2">
-            <button
-              type="submit"
-              className="btn"
-              disabled={!termsAccepted} // Disable the button if terms are not accepted
-            >
-              Create Account
-            </button>
-            <h1> or </h1>
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleFailure}
-            />
-            {message && <p>{message}</p>}
-          </div>
+            <div className="flex flex-col items-center text-center gap-2">
+              <button
+                type="submit"
+                className="btn"
+                disabled={!termsAccepted} // Disable the button if terms are not accepted
+              >
+                Create Account
+              </button>
+              <h1> or </h1>
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleFailure}
+              />
+              {message && <p>{message}</p>}
+            </div>
           </form>
           {message && <p className="text-red-600 mt-3">{message}</p>}{" "}
           {/* Error message in red */}

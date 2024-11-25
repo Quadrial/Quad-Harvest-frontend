@@ -13,7 +13,7 @@ const Index = () => {
     const fetchClientId = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/google-client-id"
+          "https://quad-harvest-backend.onrender.com/api/google-client-id"
         );
         const data = await response.json();
         setClientId(data.clientId);

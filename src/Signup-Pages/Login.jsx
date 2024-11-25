@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
-  const API_URL = "http://localhost:5000/api/auth";
+  const API_URL = "https://quad-harvest-backend.onrender.com/api/auth";
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
