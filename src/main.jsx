@@ -1,16 +1,41 @@
+import { useEffect, useState } from "react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import App from "./App";
+import "./index.css";
 
-createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId="309744924880-7ud98991mma53rf9d96f6iubtnn7itcs.apps.googleusercontent.com">
-    <BrowserRouter>
-      <StrictMode>
-        <App />
-      </StrictMode>
-    </BrowserRouter>
-  </GoogleOAuthProvider>
-);
+const Index = () => {
+  const [clientId, setClientId] = useState("");
+
+  useEffect(() => {
+    const fetchClientId = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/google-client-id"
+        );
+        const data = await response.json();
+        setClientId(data.clientId);
+      } catch (error) {
+        console.error("Failed to fetch Google Client ID:", error);
+      }
+    };
+
+    fetchClientId();
+  }, []);
+
+  if (!clientId) return <p>Loading...</p>;
+
+  return (
+    <GoogleOAuthProvider clientId={clientId}>
+      <BrowserRouter>
+        <StrictMode>
+          <App />
+        </StrictMode>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
+  );
+};
+
+createRoot(document.getElementById("root")).render(<Index />);
