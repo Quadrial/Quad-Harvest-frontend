@@ -1,0 +1,25 @@
+body {
+  background-color: #e5e5ea;
+  background: linear-gradient(to bottom, #acffac, #b2fffc);
+  background-attachment: fixed;
+}
+.profile-pix {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-input {
+  margin-bottom: 10px;
+}
+
+.upload-button {
+  cursor: pointer;
+}
