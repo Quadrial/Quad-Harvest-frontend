@@ -145,8 +145,9 @@ const Login = () => {
             </button>
             <h1> or </h1>
             <GoogleLogin
+              clientId="309744924880-7ud98991mma53rf9d96f6iubtnn7itcs.apps.googleusercontent.com"
               onSuccess={handleGoogleSuccess}
-              onError={handleGoogleFailure}
+              onFailure={handleGoogleFailure}
               render={(renderProps) => (
                 <button
                   onClick={renderProps.onClick}
