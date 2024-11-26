@@ -70,7 +70,10 @@ const Profile = () => {
 
   // Handle profile picture upload
   const handleUpload = async () => {
-    if (!profilePicture || !user) return;
+    if (!profilePicture || !user) {
+      alert("No file selected or user not logged in.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("profilePicture", profilePicture);
@@ -82,7 +85,7 @@ const Profile = () => {
       //   "http://localhost:5000/api/uploads",
       //   formData,
       const response = await axios.post(
-        "https://quad-harvest-backend.onrender.com/uploads",
+        "https://quad-harvest-backend.onrender.com/api/uploads",
         formData,
         {
           headers: {
