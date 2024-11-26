@@ -1,4 +1,5 @@
-export const API_URL = "http://localhost:5000/api/auth";
+// export const API_URL = "http://localhost:5000/api/auth";
+export const API_URL = "https://quad-harvest-backend.onrender.com/api/auth";
 
 const config = {
   googleClientId:
