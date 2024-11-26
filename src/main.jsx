@@ -1,41 +1,17 @@
-import { useEffect, useState } from "react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import App from "./App";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import config from "./config";
 
-const Index = () => {
-  const [clientId, setClientId] = useState("");
-
-  useEffect(() => {
-    const fetchClientId = async () => {
-      try {
-        const response = await fetch(
-          "https://quad-harvest-backend.onrender.com/api/google-client-id"
-        );
-        const data = await response.json();
-        setClientId(data.clientId);
-      } catch (error) {
-        console.error("Failed to fetch Google Client ID:", error);
-      }
-    };
-
-    fetchClientId();
-  }, []);
-
-  if (!clientId) return <p>Loading...</p>;
-
-  return (
-    <GoogleOAuthProvider clientId={clientId}>
-      <BrowserRouter>
-        <StrictMode>
-          <App />
-        </StrictMode>
-      </BrowserRouter>
-    </GoogleOAuthProvider>
-  );
-};
-
-createRoot(document.getElementById("root")).render(<Index />);
+createRoot(document.getElementById("root")).render(
+  <GoogleOAuthProvider clientId={config.googleClientId}>
+    <BrowserRouter>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </BrowserRouter>
+  </GoogleOAuthProvider>
+);

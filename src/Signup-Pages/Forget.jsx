@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Header from "./Header";
 
 const ForgotPassword = () => {
+  // const API_URL = "http://localhost:5000/api/auth";
   const API_URL = "https://quad-harvest-backend.onrender.com/api/auth";
   const navigate = useNavigate(); // Initialize useNavigate
   const [formData, setFormData] = useState({

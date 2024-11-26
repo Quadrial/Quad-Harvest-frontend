@@ -5,7 +5,9 @@ import Header from "./Header";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
+  // const API_URL = "http://localhost:5000/api/auth";
   const API_URL = "https://quad-harvest-backend.onrender.com/api/auth";
+
   const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const [formData, setFormData] = useState({

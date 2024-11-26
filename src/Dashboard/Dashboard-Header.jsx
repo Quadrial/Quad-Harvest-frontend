@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { BsShop } from "react-icons/bs";
 import { MdShoppingCartCheckout, MdOutlineSettings } from "react-icons/md";
-import { IoIosNotifications } from "react-icons/io";
+// import { IoIosNotifications } from "react-icons/io";
 import { GrLogout } from "react-icons/gr";
 import { FaThemeisle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
