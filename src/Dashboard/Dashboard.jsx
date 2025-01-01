@@ -24,9 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          "https://quad-harvest-backend.onrender.com/api/posts"
-        );
+        const response = await fetch("http://localhost:5000/api/posts");
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
@@ -46,17 +44,14 @@ const Dashboard = () => {
     if (!newPost.trim() || !user) return;
 
     try {
-      const response = await fetch(
-        "https://quad-harvest-backend.onrender.com/api/posts",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user._id,
-            text: newPost,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user._id,
+          text: newPost,
+        }),
+      });
 
       if (response.ok) {
         const createdPost = await response.json();
@@ -72,54 +67,49 @@ const Dashboard = () => {
 
   // Handle like action
   // Like a post
-  const handleLike = async (postId) => {
-    try {
-      const response = await fetch(
-        `https://quad-harvest-backend.onrender.com/api/posts/${postId}/like`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: user._id }),
-        }
-      );
+const handleLike = async (postId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user._id }),
+    });
 
-      const updatedPost = await response.json();
+    const updatedPost = await response.json();
 
-      // Update the post in the state
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId ? { ...post, likes: updatedPost.likes } : post
-        )
-      );
-    } catch (error) {
-      console.error("Error liking the post:", error);
-    }
-  };
+    // Update the post in the state
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, likes: updatedPost.likes } : post
+      )
+    );
+  } catch (error) {
+    console.error("Error liking the post:", error);
+  }
+};
 
-  // Save a post
-  const handleSave = async (postId) => {
-    try {
-      const response = await fetch(
-        `https://quad-harvest-backend.onrender.com/api/posts/${postId}/save`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: user._id }),
-        }
-      );
+// Save a post
+const handleSave = async (postId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/posts/${postId}/save`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user._id }),
+    });
 
-      const updatedPost = await response.json();
+    const updatedPost = await response.json();
 
-      // Update the post in the state
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId ? { ...post, saves: updatedPost.saves } : post
-        )
-      );
-    } catch (error) {
-      console.error("Error saving the post:", error);
-    }
-  };
+    // Update the post in the state
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, saves: updatedPost.saves } : post
+      )
+    );
+  } catch (error) {
+    console.error("Error saving the post:", error);
+  }
+};
+
 
   return (
     <>
@@ -150,7 +140,7 @@ const Dashboard = () => {
                 <img
                   src={
                     user?.profilePicture
-                      ? `https://quad-harvest-backend.onrender.com/${user.profilePicture}`
+                      ? `http://localhost:5000/${user.profilePicture}`
                       : "images/default-avatar.png"
                   }
                   alt="Profile"
@@ -176,7 +166,7 @@ const Dashboard = () => {
                       <img
                         src={
                           post.userId?.profilePicture
-                            ? `https://quad-harvest-backend.onrender.com/${post.userId.profilePicture}`
+                            ? `http://localhost:5000/${post.userId.profilePicture}`
                             : "images/default-avatar.png"
                         }
                         alt="Poster"
@@ -191,7 +181,7 @@ const Dashboard = () => {
 
                     {post.image && (
                       <img
-                        src={`https://quad-harvest-backend.onrender.com/${post.image}`}
+                        src={`http://localhost:5000/${post.image}`}
                         alt="Post"
                         className="w-full h-[300px] rounded-lg object-cover mt-3"
                       />

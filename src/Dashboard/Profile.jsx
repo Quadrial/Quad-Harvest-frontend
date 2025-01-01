@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Dashboard-Header";
 
@@ -32,10 +32,7 @@ const Profile = () => {
     if (user) {
       const fetchUserPosts = async () => {
         try {
-          // const response = await fetch(`http://localhost:5000/api/posts/user/${user._id}`);
-          const response = await fetch(
-            `https://quad-harvest-backend.onrender.com/${user._id}`
-          );
+          const response = await fetch(`http://localhost:5000/api/posts/user/${user._id}`);
           const data = await response.json();
           console.log("Fetched user posts:", data);
           if (Array.isArray(data)) setUserPosts(data);
@@ -43,13 +40,10 @@ const Profile = () => {
           console.error("Error fetching user posts:", error);
         }
       };
-
+  
       const fetchSavedPosts = async () => {
         try {
-          // const response = await fetch(`http://localhost:5000/api/posts/saved/${user._id}`);
-          const response = await fetch(
-            `https://quad-harvest-backend.onrender.com/${user._id}`
-          );
+          const response = await fetch(`http://localhost:5000/api/posts/saved/${user._id}`);
           const data = await response.json();
           console.log("Fetched saved posts:", data);
           if (Array.isArray(data)) setSavedPosts(data);
@@ -57,11 +51,12 @@ const Profile = () => {
           console.error("Error fetching saved posts:", error);
         }
       };
-
+  
       fetchUserPosts();
       fetchSavedPosts();
     }
   }, [user]);
+  
 
   // Handle file change for profile picture
   const handleFileChange = (e) => {
@@ -70,22 +65,15 @@ const Profile = () => {
 
   // Handle profile picture upload
   const handleUpload = async () => {
-    if (!profilePicture || !user) {
-      alert("No file selected or user not logged in.");
-      return;
-    }
+    if (!profilePicture || !user) return;
 
     const formData = new FormData();
     formData.append("profilePicture", profilePicture);
     formData.append("userId", user._id || user.id);
 
-    // https://quad-harvest-backend.onrender.com/
     try {
-      // const response = await axios.post(
-      //   "http://localhost:5000/api/uploads",
-      //   formData,
       const response = await axios.post(
-        "https://quad-harvest-backend.onrender.com/api/uploads",
+        "http://localhost:5000/api/uploads",
         formData,
         {
           headers: {
@@ -119,7 +107,7 @@ const Profile = () => {
             <img
               src={
                 user?.profilePicture
-                  ? `https://quad-harvest-backend.onrender.com/${user.profilePicture}`
+                  ? `http://localhost:5000/${user.profilePicture}`
                   : "images/default-avatar.png"
               }
               alt="Profile"
@@ -157,7 +145,7 @@ const Profile = () => {
                 <h3 className="text-xl font-bold">{post.text}</h3>
                 {post.image && (
                   <img
-                    src={`https://quad-harvest-backend.onrender.com/${post.image}`}
+                    src={`http://localhost:5000/${post.image}`}
                     alt="Post Image"
                     className="w-full h-[300px] object-cover mt-3"
                   />
@@ -178,7 +166,7 @@ const Profile = () => {
                 <h3 className="text-xl font-bold">{post.text}</h3>
                 {post.image && (
                   <img
-                    src={`https://quad-harvest-backend.onrender.com/${post.image}`}
+                    src={`http://localhost:5000/${post.image}`}
                     alt="Saved Post Image"
                     className="w-full h-[300px] object-cover mt-3"
                   />

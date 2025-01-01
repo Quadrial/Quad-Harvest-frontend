@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -13,3 +13,17 @@
   }
 }
 
+.hbg {
+  background-image: url(/images/TTimage.png);
+}
+@media (max-width: 1024px) {
+  .hbg {
+    background-image: url(/images/image1.jpg);
+  }
+}
+
+@media (max-width: 640px) {
+  .hbg {
+    background-image: url(/images/image1.jpg);
+  }
+}
